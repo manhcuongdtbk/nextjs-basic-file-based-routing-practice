@@ -1,5 +1,5 @@
 function EventShowPage() {
-  return(
+  return (
     <div>
       <h1>Event Show Page</h1>
     </div>
