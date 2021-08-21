@@ -1,8 +1,27 @@
+import {useRouter} from "next/router"
+import {getEventById} from "../../dummy-data"
+import {Fragment} from "react"
+import EventSummary from "../../components/event-show/event-summary"
+import EventLogistics from "../../components/event-show/event-logistics"
+import EventContent from "../../components/event-show/event-content"
+
 function EventShowPage() {
+  const router = useRouter()
+  const eventId = router.query.eventId
+  const event = getEventById(eventId)
+
+  if (!event) {
+    return <p>No Event found!</p>
+  }
+
   return (
-    <div>
-      <h1>Event Show Page</h1>
-    </div>
+    <Fragment>
+      <EventSummary title={event.title} />
+      <EventLogistics date={event.date} address={event.location} image={event.image} imageAlt={event.title} />
+      <EventContent>
+        <p>{event.description}</p>
+      </EventContent>
+    </Fragment>
   )
 }
 
